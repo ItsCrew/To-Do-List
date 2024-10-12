@@ -54,8 +54,12 @@ addButton.addEventListener("click", function () {
   console.log("test");
 });
 
-removeButtons.forEach((removeb) => {
+removeButtons.forEach((removeb, index) => {
   removeb.addEventListener("click", function () {
-    // const
+    const li = taskItems[index];
+    console.log("Task Deleted!");
+    li.childNodes[0].textContent = "";
+    editButtons[index].remove();
+    removeb.remove();
   });
 });
