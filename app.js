@@ -7,6 +7,7 @@
 const taskItems = document.querySelectorAll("#list-container li");
 const editButtons = document.querySelectorAll(".edit");
 const removeButtons = document.querySelectorAll(".remove");
+const addButton = document.querySelector(".add");
 
 editButtons.forEach((button, index) => {
   button.addEventListener("click", function () {
@@ -31,12 +32,30 @@ editButtons.forEach((button, index) => {
 
     save.addEventListener("click", function () {
       const updateText = input.value;
-      li.childNodes[0].textContent = updateText;
-      input.remove();
-      save.remove();
-      button.style.display = "inline";
+      if (updateText === "") {
+        console.log("eh?");
+        li.childNodes[0].textContent = "";
+        input.remove();
+        save.remove();
+      } else {
+        li.childNodes[0].textContent = updateText;
+        input.remove();
+        save.remove();
+        button.style.display = "inline";
+        removeButtons[index].style.display = "inline";
+      }
     });
 
     button.style.display = "none";
+  });
+});
+
+addButton.addEventListener("click", function () {
+  console.log("test");
+});
+
+removeButtons.forEach((removeb) => {
+  removeb.addEventListener("click", function () {
+    // const
   });
 });
