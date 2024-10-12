@@ -1,5 +1,3 @@
-// When clicked on edit it turns into a input box and i edit it to whatever it wants and then it switches back to edit button but the task changes.
-// remove button removes it ofc.
 // delete all button
 // add btn functionality
 // make the input box look better
@@ -8,6 +6,7 @@ const taskItems = document.querySelectorAll("#list-container li");
 const editButtons = document.querySelectorAll(".edit");
 const removeButtons = document.querySelectorAll(".remove");
 const addButton = document.querySelector(".add");
+const clear = document.querySelector(".clear");
 
 editButtons.forEach((button, index) => {
   button.addEventListener("click", function () {
@@ -48,6 +47,10 @@ editButtons.forEach((button, index) => {
 
     button.style.display = "none";
   });
+});
+
+clear.addEventListener("click", function () {
+  console.log("e");
 });
 
 addButton.addEventListener("click", function () {
