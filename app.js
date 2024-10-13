@@ -11,13 +11,23 @@ const clear = document.querySelector(".clear");
 const textBox = document.getElementById("text-box");
 
 // Add button
-addButton.addEventListener("click", function () {
+function addTask() {
   const taskText = textBox.value.trim();
   if (taskText !== "") {
     createTaskElement(taskText);
-    textBox.value = "";
+    textBox.value = ""; // Clear the input box after adding
   }
-  // console.log(taskText);
+}
+
+addButton.addEventListener("click", function () {
+  addTask();
+});
+
+// Keydown Event Listener: Checks for the Enter key
+textBox.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
 });
 
 // Clear All Button
