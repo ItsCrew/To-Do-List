@@ -1,6 +1,5 @@
-// delete all button
-// add btn functionality
 // make the input box look better
+// add so it saves to local storage
 
 const taskItems = document.querySelectorAll("#list-container li");
 const listContainer = document.getElementById("list-container");
