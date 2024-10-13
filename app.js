@@ -3,66 +3,86 @@
 // make the input box look better
 
 const taskItems = document.querySelectorAll("#list-container li");
-const editButtons = document.querySelectorAll(".edit");
-const removeButtons = document.querySelectorAll(".remove");
+const listContainer = document.getElementById("list-container");
+// const editButtons = document.querySelectorAll(".edit");
+// const removeButtons = document.querySelectorAll(".remove");
 const addButton = document.querySelector(".add");
 const clear = document.querySelector(".clear");
+const textBox = document.getElementById("text-box");
 
-editButtons.forEach((button, index) => {
-  button.addEventListener("click", function () {
-    const li = taskItems[index];
-    const taskText = li.childNodes[0].textContent.trim();
-    console.log(taskText);
-
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = taskText;
-    input.placeholder = "Edit the task";
-
-    removeButtons[index].style.display = "none";
-
-    const save = document.createElement("button");
-    save.textContent = "Save";
-    save.classList.add("btn");
-
-    li.childNodes[0].textContent = "";
-    li.appendChild(input);
-    li.appendChild(save);
-
-    save.addEventListener("click", function () {
-      const updateText = input.value;
-      if (updateText === "") {
-        console.log("eh?");
-        li.childNodes[0].textContent = "";
-        input.remove();
-        save.remove();
-      } else {
-        li.childNodes[0].textContent = updateText;
-        input.remove();
-        save.remove();
-        button.style.display = "inline";
-        removeButtons[index].style.display = "inline";
-      }
-    });
-
-    button.style.display = "none";
-  });
-});
-
-clear.addEventListener("click", function () {
-  console.log("e");
-});
-
+// Add button
 addButton.addEventListener("click", function () {
-  console.log("test");
+  const taskText = textBox.value.trim();
+  if (taskText !== "") {
+    createTaskElement(taskText);
+    textBox.value = "";
+  }
+  // console.log(taskText);
 });
 
-removeButtons.forEach((removeb, index) => {
-  removeb.addEventListener("click", function () {
-    const li = taskItems[index];
-    console.log("Task Deleted!");
-    li.childNodes[0].textContent = "";
-    editButtons[index].remove();
-    removeb.remove();
-  });
+// Clear All Button
+clear.addEventListener("click", () => {
+  listContainer.innerHTML = "";
 });
+
+// Function for add button
+function createTaskElement(taskText) {
+  const li = document.createElement("li");
+  li.innerHTML = `
+  <span class="task-text">${taskText}</span>
+  <button class="btn edit">Edit</button>
+  <button class="btn remove">Remove</button>
+  `;
+
+  const editButton = li.querySelector(".edit");
+  const removeButton = li.querySelector(".remove");
+
+  editButton.addEventListener("click", function () {
+    editTask(li, editButton, removeButton);
+  });
+
+  removeButton.addEventListener("click", function () {
+    li.remove();
+  });
+
+  listContainer.appendChild(li);
+}
+
+// function for edit button
+function editTask(li, editButton, removeButton) {
+  const taskText = li.querySelector(".task-text").textContent.trim();
+  console.log(taskText);
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = taskText;
+  input.placeholder = "Edit the task";
+
+  const save = document.createElement("button");
+  save.textContent = "Save";
+  save.classList.add("btn");
+
+  //clear the current text and hide the buttons
+  editButton.style.display = "none";
+  removeButton.style.display = "none";
+
+  li.querySelector(".task-text").textContent = "";
+  li.appendChild(input);
+  li.appendChild(save);
+
+  save.addEventListener("click", function () {
+    const updateText = input.value;
+    if (updateText === "") {
+      console.log("eh?");
+      li.childNodes[0].textContent = "";
+      input.remove();
+      save.remove();
+    } else {
+      li.childNodes[0].textContent = updateText;
+      input.remove();
+      save.remove();
+      editButton.style.display = "inline";
+      removeButton.style.display = "inline";
+    }
+  });
+}
