@@ -39,17 +39,14 @@ body {
     padding: 20px;
     /* border: 2px solid #008080; */
     outline: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+    border-radius: 40px 0 0 40px;
     font-size: 16px;
     background: transparent;
     background-color: #ffe6e6;
     color: #153677;
     border: 2px solid #f77f77;
     transition: all 0.3s ease;  /* Smooth animation */
-    width: 100%;
+    width: calc(100% - 80px);
 }
 
 #text-box:hover, 
@@ -83,8 +80,7 @@ body {
     transition: background 0.3s ease;
 }
 
-ul {
-    list-style-type: none; 
+ol {
     padding: 0; 
 }
 
