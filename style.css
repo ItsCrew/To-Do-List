@@ -49,6 +49,7 @@ body {
     color: #153677;
     border: 2px solid #f77f77;
     transition: all 0.3s ease;  /* Smooth animation */
+    width: 100%;
 }
 
 #text-box:hover, 
