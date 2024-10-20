@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Arial", sans-serif;
   box-sizing: border-box;
 }
 
@@ -13,102 +13,96 @@ body {
   width: 100%;
   min-height: 100vh;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .todo-app {
   width: 50%;
-  min-width: 300px !important;
+  min-width: 300px;
   background-color: #fff;
   margin: 40px auto;
-  padding: 40px 30px 70px;
-  border-radius: 10px;
-  display: block;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .row {
-  position: relative;
+  display: flex;
   align-items: center;
-  padding-left: 0;
-  padding-bottom: 10px;
+  margin-bottom: 25px;
+  border-radius: 40px;
+  background: #edeef0;
+  padding: 5px;
 }
 
 #text-box {
   flex-grow: 1;
-  position: static;
   height: 50px;
-  padding: 20px;
-  /* border: 2px solid #008080; */
+  padding: 0 20px;
+  border: none;
   outline: none;
   border-radius: 40px 0 0 40px;
   font-size: 16px;
-  background: transparent;
   background-color: #ffe6e6;
   color: #153677;
   border: 2px solid #f77f77;
-  transition: all 0.3s ease; /* Smooth animation */
-  width: calc(100% - 80px);
+  transition: all 0.3s ease;
 }
 
 #text-box:hover,
 #text-box:focus {
-  background-color: #fcdede; /* Lighter peach on hover/focus */
-  border-color: #f05a5a; /* Darker peach border */
-  outline: none; /* Remove blue focus outline */
+  background-color: #fcdede;
+  border-color: #f05a5a;
 }
 
 .add {
   height: 50px;
   width: 100px;
-  /* border: 2px solid black; */
-  outline: none;
-  background: #008080;
-  /* border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px; */
-  border-radius: 40px;
-  cursor: pointer;
-  position: absolute;
-  right: 0;
+  border-radius: 0 40px 40px 0;
   background-color: #f77f77;
   color: white;
   border: none;
-  font-size: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .add:hover {
   background-color: #f05a5a;
-  transition: background 0.3s ease;
 }
 
-ol {
+ul {
+  list-style-type: none;
   padding: 0;
 }
 
 li {
-  align-items: center;
-  justify-content: space-between;
-  margin: 5px 0;
-  padding: 10px;
+  margin: 20px 0;
+  padding: 15px;
   background-color: #f9f9f9;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-  margin-left: 5px;
-  padding: 5px 10px;
+  padding: 8px 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.btn.btn.edit:hover {
-  background-color: #339036;
   transition: all 0.3s ease;
 }
 
 .btn.edit {
   background-color: #4caf50;
   color: white;
+  margin-left: 0.25rem;
+}
+
+.btn.edit:hover {
+  background-color: #339036;
 }
 
 .btn.remove {
@@ -117,16 +111,47 @@ li {
 }
 
 .clear {
-  margin-left: 42%;
-  margin-top: 20px;
+  margin: 20px auto;
   height: 50px;
-  width: 80px;
-  /* border: none; */
-  border-radius: 10px;
-  background: transparent;
+  width: 120px;
+  border-radius: 25px;
+  background-color: transparent;
+  border: 2px solid rebeccapurple;
+  color: rebeccapurple;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .clear:hover {
   background-color: rebeccapurple;
-  transition: all 0.1s ease;
+  color: white;
+}
+
+.EditInput {
+  height: 40px;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 16px;
+  background-color: #ffe6e6;
+  color: #153677;
+  border: 2px solid #f77f77;
+  width: calc(80% - 60px);
+  transition: all 0.3s ease;
+}
+
+.SaveButton {
+  height: 40px;
+  width: 100px;
+  border-radius: 40px;
+  background-color: #f77f77;
+  color: white;
+  border: none;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.SaveButton:hover {
+  background-color: #f05a5a;
 }
