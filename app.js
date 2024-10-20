@@ -64,10 +64,12 @@ function editTask(li, editButton, removeButton) {
   input.type = "text";
   input.value = taskText;
   input.placeholder = "Edit the task";
+  input.className = "EditInput";
 
   const saveButton = document.createElement("button");
   saveButton.textContent = "Save";
   saveButton.classList.add("btn");
+  saveButton.className = "SaveButton";
 
   // Hide buttons and show the input field
   editButton.style.display = "none";
@@ -78,7 +80,7 @@ function editTask(li, editButton, removeButton) {
   li.appendChild(saveButton);
 
   // Save the updated task or revert if empty
-  saveButton.addEventListener("click", () => {
+  function saveUpdatedTask() {
     const updatedText = input.value.trim();
     if (updatedText) {
       li.querySelector(".task-text").textContent = updatedText;
@@ -90,7 +92,20 @@ function editTask(li, editButton, removeButton) {
     } else {
       console.log("Task cannot be empty!");
     }
+  }
+
+  // Click event for the Save button
+  saveButton.addEventListener("click", saveUpdatedTask);
+
+  // Keydown event for the Enter key on the input field
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      saveUpdatedTask();
+    }
   });
+
+  // Focus on the input field for user convenience
+  input.focus();
 }
 
 // Save tasks to local storage
