@@ -34,10 +34,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Create and append a new task element
-  function createTaskElement(taskText) {
+  function createTaskElement(taskText, isDone = false) {
     const li = document.createElement("li");
-    li.innerHTML = `<span class="task-text">${taskText}</span>`;
+    li.className = isDone ? "task done" : "task";
+    li.innerHTML = `
+      <i class="fa-regular ${
+        isDone ? "fa-check-circle" : "fa-circle"
+      } checkbox-icon"></i>
+      <span class="task-text">${taskText}</span>
+    `;
+
+    const checkboxIcon = li.querySelector(".checkbox-icon");
+    checkboxIcon.addEventListener("click", () =>
+      toggleTaskDone(li, checkboxIcon)
+    );
+
     listContainer.appendChild(li);
+
+    function toggleTaskDone(li, checkboxIcon) {
+      li.classList.toggle("done");
+      checkboxIcon.classList.toggle("fa-circle");
+      checkboxIcon.classList.toggle("fa-check-circle");
+      saveTasksToLocalStorage();
+    }
 
     li.addEventListener("contextmenu", (e) => {
       e.preventDefault();
@@ -84,12 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
     input.type = "text";
     input.value = taskText;
     input.placeholder = "Edit the task";
-    input.className = "EditInput";
+    input.className = "edit-input";
 
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save";
     saveButton.classList.add("btn");
-    saveButton.className = "SaveButton";
+    saveButton.className = "save-button";
 
     // Clear the task text and add the input field for editing
     li.innerHTML = "";
@@ -100,7 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveUpdatedTask() {
       const updatedText = input.value.trim();
       if (updatedText) {
-        li.innerHTML = `<span class="task-text">${updatedText}</span>`;
+        li.innerHTML = `<i class="fa-regular fa-circle checkbox-icon"></i><span class="task-text">${updatedText}</span>`;
+        li.classList.remove("done");
+        createTaskElement(updatedText);
         saveTasksToLocalStorage();
       } else {
         console.log("Task cannot be empty!");
@@ -122,36 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Save tasks to local storage
   function saveTasksToLocalStorage() {
-    const tasks = Array.from(listContainer.children).map((li) =>
-      li.querySelector(".task-text").textContent.trim()
-    );
+    const tasks = Array.from(listContainer.children).map((li) => ({
+      text: li.querySelector(".task-text").textContent.trim(),
+      done: li.classList.contains("done"),
+    }));
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   // Load tasks from local storage
   function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.forEach((taskText) => createTaskElement(taskText));
+    tasks.forEach(({ text, done }) => createTaskElement(text, done));
   }
 });
-
-// // testing the click and right click feature
-// const rightclick = document.querySelector(".test");
-// const dropdown = document.createElement("div");
-// dropdown.style.height = "100px";
-// dropdown.style.width = "100px";
-// dropdown.style.backgroundColor = "red";
-// dropdown.style.display = "none";
-// dropdown.className = "oi";
-// dropdown.style.position = "absolute"; // Make sure it's positioned absolutely
-
-// document.body.appendChild(dropdown);
-
-// rightclick.addEventListener("contextmenu", (e) => {
-//   e.preventDefault();
-
-//   dropdown.style.top = `${e.clientY}px`;
-//   dropdown.style.left = `${e.clientX}px`;
-
-//   dropdown.style.display = "block";
-// });
