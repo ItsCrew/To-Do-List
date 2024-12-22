@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const contextMenu = document.querySelector(".context-menu");
   const editButton = document.querySelector(".editOption");
   const removeButton = document.querySelector(".removeOption");
+  const colorPicker = document.getElementById("colorPicker");
+  const openColorPickerButton = document.getElementById("openColorPicker");
 
   // Load tasks from local storage when the page loads
   loadTasksFromLocalStorage();
@@ -16,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (taskText !== "") {
       createTaskElement(taskText);
       saveTasksToLocalStorage();
-      textBox.value = ""; // Clear input field
+      textBox.value = "";
     }
   }
 
@@ -33,12 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("tasks");
   });
 
-  // Create and append a new task element
-  function createTaskElement(taskText) {
+  // Create and append a new task element with an optional end time
+  function createTaskElement(taskText, color = "") {
+    // A function which has 3 arguments taskText, endtime which is set to be empty by default and same with colour
     const li = document.createElement("li");
-    li.innerHTML = `<span class="task-text">${taskText}</span>`;
+
+    // Set initial background color if provided
+    if (color) {
+      li.style.backgroundColor = color;
+    } // Ask chat gpt
+
+    // Task text and optional end time
+    li.innerHTML = `
+      <span class="task-text">${taskText}</span>
+    `;
+
     listContainer.appendChild(li);
 
+    // Context menu setup for the task
     li.addEventListener("contextmenu", (e) => {
       e.preventDefault();
 
@@ -76,6 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Open color picker for specific task
+  openColorPickerButton.addEventListener("click", () => {
+    if (contextMenu.currentTask) {
+      colorPicker.click(); // Open color picker
+    }
+    contextMenu.style.display = "none";
+  });
+
+  // Apply selected color to the specific task
+  colorPicker.addEventListener("input", function () {
+    if (contextMenu.currentTask) {
+      contextMenu.currentTask.style.backgroundColor = this.value;
+      saveTasksToLocalStorage(); // Save color change to local storage
+    }
+  });
+
   // Edit an existing task
   function editTask(li) {
     const taskText = li.querySelector(".task-text").textContent.trim();
@@ -107,10 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Save button click to save updated task
     saveButton.addEventListener("click", saveUpdatedTask);
-
-    // Enter key to save updated task
     input.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         saveUpdatedTask();
@@ -122,36 +149,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Save tasks to local storage
   function saveTasksToLocalStorage() {
-    const tasks = Array.from(listContainer.children).map((li) =>
-      li.querySelector(".task-text").textContent.trim()
-    );
+    // We are creating a function here called saveTasksToLocalStorage
+    // console.log(listContainer.children);
+    const tasks = Array.from(listContainer.children).map((li) => ({
+      // Here we are defining tasks which
+      text: li.querySelector(".task-text").textContent.trim(),
+      color: li.style.backgroundColor || "", // Save background color if set
+    }));
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   // Load tasks from local storage
   function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.forEach((taskText) => createTaskElement(taskText));
+    tasks.forEach(({ text, color }) => createTaskElement(text, color));
   }
 });
-
-// // testing the click and right click feature
-// const rightclick = document.querySelector(".test");
-// const dropdown = document.createElement("div");
-// dropdown.style.height = "100px";
-// dropdown.style.width = "100px";
-// dropdown.style.backgroundColor = "red";
-// dropdown.style.display = "none";
-// dropdown.className = "oi";
-// dropdown.style.position = "absolute"; // Make sure it's positioned absolutely
-
-// document.body.appendChild(dropdown);
-
-// rightclick.addEventListener("contextmenu", (e) => {
-//   e.preventDefault();
-
-//   dropdown.style.top = `${e.clientY}px`;
-//   dropdown.style.left = `${e.clientX}px`;
-
-//   dropdown.style.display = "block";
-// });
