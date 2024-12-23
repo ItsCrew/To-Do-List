@@ -33,7 +33,7 @@ body {
   align-items: center;
   margin-bottom: 25px;
   border-radius: 40px;
-  background: #edeef0;
+  /* background: #edeef0; */
   padding: 5px;
 }
 
@@ -49,12 +49,17 @@ body {
   color: #153677;
   border: 2px solid #f77f77;
   transition: all 0.3s ease;
+  /* display: none; */
 }
 
 #text-box:hover,
 #text-box:focus {
   background-color: #fcdede;
   border-color: #f05a5a;
+}
+
+.no-tasks {
+  text-align: center;
 }
 
 .add {
@@ -128,6 +133,7 @@ li {
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  /* display: none; */
 }
 
 .clear:hover {

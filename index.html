@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>To Do List</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="todo-app">
-        <div class="input-container row">
-          <input type="text" id="text-box" placeholder="Add a new task!" />
-          <button class="add">Add</button>
-        </div>
-        <ol id="list-container">
-          <!-- <li>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Okay so what it should do is when the page is accessed for the first time it should be a different page then when the task is added the page is the one that is now. for this i will have to make 2 pages. 1 which already exists and 1 thats going to be there before the one that already exists -->
+
+  <title>To Do List</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="todo-app">
+      <div class="input-container row">
+        <input type="text" id="text-box" placeholder="Add a new task!" />
+        <button class="add">Add</button>
+      </div>
+      <h2 class="no-tasks" id="no-tasks">No Tasks As of Now!</h2>
+      <ol id="list-container">
+        <!-- <li>
             Task 1
             <button class="btn edit">Edit</button>
             <button class="btn remove">Remove</button>
@@ -36,21 +38,22 @@
             <button class="btn edit">Edit</button>
             <button class="btn remove">Remove</button>
           </li> -->
-        </ol>
-        </ol>
+      </ol>
+      </ol>
 
-        <button class="clear">Clear all!</button>
-      </div>
-
-      <div class="context-menu">
-        <div class="editOption"><i class="fa-solid fa-pen"></i> Edit</div>
-        <div class="ChooseColour" id="openColorPicker">
-          <i class="fa-solid fa-palette"></i> Choose Colour
-          <input type="color" id="colorPicker" style="display: none" />
-        </div>
-        <div class="removeOption"><i class="fa-solid fa-trash"></i> Remove</div>
-      </div>
+      <button class="clear">Clear all!</button>
     </div>
-    <script src="app.js"></script>
-  </body>
+
+    <div class="context-menu">
+      <div class="editOption"><i class="fa-solid fa-pen"></i> Edit</div>
+      <div class="ChooseColour" id="openColorPicker">
+        <i class="fa-solid fa-palette"></i> Choose Colour
+        <input type="color" id="colorPicker" style="display: none" />
+      </div>
+      <div class="removeOption"><i class="fa-solid fa-trash"></i> Remove</div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
 </html>

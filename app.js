@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const removeButton = document.querySelector(".removeOption");
   const colorPicker = document.getElementById("colorPicker");
   const openColorPickerButton = document.getElementById("openColorPicker");
+  const notasktext = document.querySelector(".no-tasks");
+  const row = document.querySelector(".row");
 
   // Load tasks from local storage when the page loads
   loadTasksFromLocalStorage();
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       createTaskElement(taskText);
       saveTasksToLocalStorage();
       textBox.value = "";
+      notasktext.style.display = "none";
     }
   }
 
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   clearButton.addEventListener("click", () => {
     listContainer.innerHTML = "";
     localStorage.removeItem("tasks");
+    notasktext.style.display = "block";
   });
 
   // Create and append a new task element with an optional end time
@@ -87,6 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
       contextMenu.currentTask.remove();
       saveTasksToLocalStorage();
       contextMenu.style.display = "none";
+
+      if (listContainer.children.length === 0) {
+        notasktext.style.display = "block";
+      } else {
+        notasktext.style.display = "none";
+      }
     }
   });
 
@@ -163,5 +173,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     tasks.forEach(({ text, color }) => createTaskElement(text, color));
+
+    if (tasks.length === 0) {
+      notasktext.style.display = "block";
+    } else {
+      notasktext.style.display = "none";
+    }
   }
 });
