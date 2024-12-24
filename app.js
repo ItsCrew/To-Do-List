@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const listContainer = document.getElementById("list-container");
   const addButton = document.querySelector(".add");
+  const addButtonForPrompt = document.querySelector(".add-prompt");
   const clearButton = document.querySelector(".clear");
   const textBox = document.getElementById("text-box");
   const contextMenu = document.querySelector(".context-menu");
@@ -13,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load tasks from local storage when the page loads
   loadTasksFromLocalStorage();
+
+  //The popup screen that opens when clicked on the add button
 
   // Add task when clicking the Add button or pressing Enter
   function addTask() {
