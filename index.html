@@ -18,11 +18,20 @@
   <div class="container">
     <div class="todo-app">
       <div class="input-container row">
-        <input type="text" id="text-box" placeholder="Add a new task!" />
+        <!-- <input type="text" id="text-box" placeholder="Add a new task!" /> -->
+        <div id="myModal" class="modal">
+          <!-- Inside content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Add a task</p>
+            <input type="text" id="text-box" placeholder="Add a new task!" />
+            <button id="add" class="add">Add</button>
+          </div>
+        </div>
       </div>
       <h2 class="no-tasks" id="no-tasks">No Tasks As of Now!</h2>
       <!-- <button class="add">Add</button> -->
-      <button class="add-prompt">Add</button>
+      <button class="add-prompt" id="add-prompt">Add</button>
       <ol id="list-container">
         <!-- <li>
             Task 1

@@ -12,10 +12,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const notasktext = document.querySelector(".no-tasks");
   const row = document.querySelector(".row");
 
+  // Get the modal
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("add-prompt");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  // window.onclick = function (event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // };
+
   // Load tasks from local storage when the page loads
   loadTasksFromLocalStorage();
 
   //The popup screen that opens when clicked on the add button
+  addButtonForPrompt.addEventListener("click", () => {
+    console.log("It works");
+  });
 
   // Add task when clicking the Add button or pressing Enter
   function addTask() {
@@ -25,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       saveTasksToLocalStorage();
       textBox.value = "";
       notasktext.style.display = "none";
+      if (clearButton) clearButton.style.display = "block"; // Show clear button when a task is added
     }
   }
 
@@ -40,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     listContainer.innerHTML = "";
     localStorage.removeItem("tasks");
     notasktext.style.display = "block";
+    clearButton.style.display = "none";
   });
 
   // Create and append a new task element with an optional end time
@@ -97,8 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (listContainer.children.length === 0) {
         notasktext.style.display = "block";
+        if (clearButton) clearButton.style.display = "none"; // Hide clear button when no tasks are left
       } else {
         notasktext.style.display = "none";
+        if (clearButton) clearButton.style.display = "block"; // Show clear button when tasks are present
       }
     }
   });
@@ -179,8 +212,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (tasks.length === 0) {
       notasktext.style.display = "block";
+      if (clearButton) clearButton.style.display = "none";
     } else {
       notasktext.style.display = "none";
+      if (clearButton) clearButton.style.display = "block";
     }
   }
 });
