@@ -3,42 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>To Do List</title>
   </head>
   <body>
     <div class="container">
-      <div class="todo-app">
-        <div class="input-container row">
-          <input type="text" id="text-box" placeholder="Add a new task!" />
-          <button class="add">Add</button>
+      <!-- Everything on the page is in this div. this is the main div like parent-->
+      <div class="ToDoApp">
+        <!-- This is the to do box where there will be input and buttons and everything everything inside this div will be in this box-->
+        <div class="InputField">
+          <!-- This is the input box and add button div.-->
+          <input type="text" id="InputBox" placeholder="Add a new task!" />
+          <button class="AddTask">Add</button>
         </div>
-        <ol type="1" id="list-container">
-          <!-- <li>
-            Task 1
-            <button class="btn edit">Edit</button>
-            <button class="btn remove">Remove</button>
-          </li>
-          <li>
-            Task 2
-            <button class="btn edit">Edit</button>
-            <button class="btn remove">Remove</button>
-          </li>
-          <li>
-            Task 3
-            <button class="btn edit">Edit</button>
-            <button class="btn remove">Remove</button>
-          </li> -->
+        <ol id="ListContainer">
+          <!-- The list will be here -->
         </ol>
-        </ol>
-
-        <button class="clear">Clear all!</button>
-      </div>
-
-      <div class="context-menu">
-        <div class="editOption">Edit</div>
-        <div class="ChooseColour">Choose Colour (Coming Soon)</div>
-        <div class="removeOption">Remove</div>
+        <button class="ClearButton">Clear all</button>
       </div>
     </div>
     <script src="app.js"></script>
