@@ -4,3 +4,34 @@
   font-family: "Arial", sans-serif;
   box-sizing: border-box;
 }
+
+body {
+  background: linear-gradient(135deg, #153677, #4e085f);
+}
+
+.LoggingIn {
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+}
+
+.Logout {
+  display: none;
+}
+
+.container {
+  width: 100%;
+  min-height: 95.8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ToDoApp {
+  width: 50%;
+  min-width: 300px;
+  background-color: #fff;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 15px;
+}
