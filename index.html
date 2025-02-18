@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="style.css" />
     <title>To Do List</title>
   </head>
+  <!-- The Login Structure -->
+
   <body>
     <div class="LoggingIn">
       <div class="Login">
@@ -24,18 +26,30 @@
     </div>
 
     <div class="container">
-      <!-- Everything on the page is in this div. this is the main div like parent-->
       <div class="ToDoApp">
-        <!-- This is the to do box where there will be input and buttons and everything everything inside this div will be in this box-->
+        <h2 class="NoTasks" id="NoTasks">Nothing here. Add a task</h2>
         <div class="InputField">
-          <!-- This is the input box and add button div.-->
-          <input type="text" id="InputBox" placeholder="Add a new task!" />
-          <button class="AddTask">Add</button>
+          <div id="AddModal" class="AddModal">
+            <!-- Inside content -->
+            <div class="ModalContent">
+              <span class="close">&times;</span>
+              <h2 class="ModalHeading">Add a Task</h2>
+              <input type="text" id="InputBox" placeholder="Add a new task!" />
+              <!-- <h3 class="AboveTimeBox">Add the Deadline!</h3>  -->
+              <!-- <input type="time" id="TimeBox" placeholder="Add a time" /> -->
+              <button id="AddTask" class="AddTask">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="AddPrompt">
+          <button class="AddPromptButton">Add</button>
         </div>
         <ol id="ListContainer">
           <!-- The list will be here -->
         </ol>
-        <button class="ClearButton">Clear all</button>
+        <div class="Clear">
+          <button class="ClearButton">Clear all</button>
+        </div>
       </div>
     </div>
     <script src="app.js"></script>

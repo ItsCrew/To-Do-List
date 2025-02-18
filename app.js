@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const ListContainer = document.getElementById("ListContainer");
   const AddTask = document.querySelector(".AddTask");
+  const AddPrompt = document.querySelector(".AddPromptButton");
+  const AddModal = document.querySelector(".AddModal");
+  const CloseModal = document.querySelector(".close");
   const clearButton = document.querySelector(".ClearButton");
   const InputBox = document.getElementById("InputBox");
   const Login = document.querySelector(".Login");
@@ -15,6 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Logged in");
     Login.style.display = "none";
     Logout.style.display = "block";
+  });
+
+  //Modal for adding a task logic
+  AddPrompt.addEventListener("click", () => {
+    AddModal.style.display = "block";
+  });
+
+  CloseModal.addEventListener("click", () => {
+    AddModal.style.display = "none";
   });
 
   // Add Task Logic
