@@ -8,16 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const InputBox = document.getElementById("InputBox");
   const Login = document.querySelector(".Login");
   const Logout = document.querySelector(".Logout");
+  const NoTasks = document.querySelector(".NoTasks");
+  const ContextMenu = document.querySelector(".ContextMenu");
+  const editButton = document.querySelector(".EditOption");
+  const removeButton = document.querySelector(".RemoveOption");
+  const ColorPicker = document.getElementById("ColorPicker");
+  const OpenColorPickerButton = document.getElementById("OpenColorPicker");
 
-  // const contextMenu = document.querySelector(".context-menu");
-  // const editButton = document.querySelector(".editOption");
-  // const removeButton = document.querySelector(".removeOption");
-
-  // Login Logic
-  Login.addEventListener("click", () => {
-    console.log("Logged in");
+  // Login Function/Logic
+  function LoginUser() {
     Login.style.display = "none";
     Logout.style.display = "block";
+  }
+
+  Login.addEventListener("click", () => {
+    LoginUser();
   });
 
   //Modal for adding a task logic
@@ -29,17 +34,46 @@ document.addEventListener("DOMContentLoaded", () => {
     AddModal.style.display = "none";
   });
 
-  // Add Task Logic
-  AddTask.addEventListener("click", () => {
+  // Add Task Function
+  function AddTaskFunction() {
     const li = document.createElement("li");
     li.textContent = InputBox.value;
     ListContainer.appendChild(li);
     InputBox.value = "";
+    NoTasks.style.display = "none";
+    clearButton.style.display = "block";
+    InputBox.focus();
+
+    //Context Menu
+    li.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+
+      // Position and show the context menu
+      ContextMenu.style.top = `${e.clientY}px`;
+      ContextMenu.style.left = `${e.clientX}px`;
+      ContextMenu.style.display = "block";
+
+      // Store reference to the current task for edit/remove actions
+      ContextMenu.currentTask = li;
+    });
+  }
+
+  AddTask.addEventListener("click", () => {
+    AddTaskFunction();
+  });
+
+  // Hide context menu when clicking outside of it
+  document.addEventListener("click", (e) => {
+    if (!ContextMenu.contains(e.target)) {
+      ContextMenu.style.display = "none";
+    }
   });
 
   // Clear Button Logic
   function Clear_Tasks() {
     ListContainer.innerHTML = "";
+    NoTasks.style.display = "block";
+    clearButton.style.display = "none";
   }
   clearButton.addEventListener("click", Clear_Tasks);
 });

@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="style.css" />
     <title>To Do List</title>
   </head>
-  <!-- The Login Structure -->
 
+  <!-- The Login Structure -->
   <body>
     <div class="LoggingIn">
       <div class="Login">
@@ -50,6 +50,15 @@
         <div class="Clear">
           <button class="ClearButton">Clear all</button>
         </div>
+      </div>
+      <!-- Context Menu -->
+      <div class="ContextMenu">
+        <div class="EditOption"><i class="fa-solid fa-pen"></i> Edit</div>
+        <div class="ChooseColour" id="OpenColorPicker">
+          <i class="fa-solid fa-palette"></i> Choose Colour
+          <input type="color" id="ColorPicker" style="display: none" />
+        </div>
+        <div class="RemoveOption"><i class="fa-solid fa-trash"></i> Remove</div>
       </div>
     </div>
     <script src="app.js"></script>

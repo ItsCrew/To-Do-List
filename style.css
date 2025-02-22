@@ -127,7 +127,68 @@ body {
   font-size: 25px;
 }
 
+/* Base styling for the context menu */
+.ContextMenu {
+  position: absolute;
+  width: 150px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+  display: none; /* Hidden by default */
+  z-index: 1;
+}
+
+/* Style each menu option */
+.ContextMenu div {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+}
+
+/* Hover effect for options */
+.ContextMenu div:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+.ContextMenu .RemoveOption:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Add a smooth transition */
+.ContextMenu div {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Customize the first and last option to have rounded corners */
+.ContextMenu div:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.ContextMenu div:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 li {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   list-style-type: none;
 }
 
@@ -141,4 +202,5 @@ li {
   width: 70px;
   border: none;
   border-radius: 10px;
+  display: none;
 }
