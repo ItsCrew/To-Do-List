@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //Modal for adding a task logic
   AddPrompt.addEventListener("click", () => {
     AddModal.style.display = "block";
-  });
-
-  CloseModal.addEventListener("click", () => {
-    AddModal.style.display = "none";
+    InputBox.focus();
+    CloseModal.addEventListener("click", () => {
+      AddModal.style.display = "none";
+    });
   });
 
   //Hide Modal when clicking outside of it
@@ -41,16 +41,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  InputBox.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      AddModal.style.display = "none";
+    }
+  });
+
   // Add Task Function
   function AddTaskFunction() {
-    const li = document.createElement("li");
-    li.textContent = InputBox.value;
-    ListContainer.appendChild(li);
-    InputBox.value = "";
-    NoTasks.style.display = "none";
-    clearButton.style.display = "block";
+    const taskText = InputBox.value.trim();
+    if (taskText !== "") {
+      CreateTaskElement(taskText);
+      //save
+      InputBox.value = "";
+      NoTasks.style.display = "none";
+      if (clearButton) clearButton.style.display = "block";
+    }
     InputBox.focus();
-    //Context Menu
+    // AddModal.style.display = "none";
+  }
+
+  function CreateTaskElement(taskText, color = "") {
+    const li = document.createElement("li");
+
+    if (color) {
+      li.style.backgroundColor = color;
+    }
+    li.innerHTML = `
+      <span class="TaskText">${taskText}</span>
+    `;
+
+    ListContainer.appendChild(li);
+
     li.addEventListener("contextmenu", (e) => {
       e.preventDefault();
 
@@ -63,6 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
       ContextMenu.currentTask = li;
     });
   }
+
+  editButton.addEventListener("click", () => {
+    if (ContextMenu.currentTask) {
+      EditTask(ContextMenu.currentTask);
+      ContextMenu.style.display = "none";
+    }
+  });
 
   function EditTask() {}
 
