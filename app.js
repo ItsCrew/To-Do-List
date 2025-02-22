@@ -34,6 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
     AddModal.style.display = "none";
   });
 
+  //Hide Modal when clicking outside of it
+  window.onclick = function (event) {
+    if (event.target == AddModal) {
+      AddModal.style.display = "none";
+    }
+  };
+
   // Add Task Function
   function AddTaskFunction() {
     const li = document.createElement("li");
@@ -43,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     NoTasks.style.display = "none";
     clearButton.style.display = "block";
     InputBox.focus();
-
     //Context Menu
     li.addEventListener("contextmenu", (e) => {
       e.preventDefault();
