@@ -64,8 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function EditTask() {}
+
   AddTask.addEventListener("click", () => {
     AddTaskFunction();
+  });
+
+  InputBox.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      AddTaskFunction();
+    }
   });
 
   // Hide context menu when clicking outside of it
