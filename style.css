@@ -192,6 +192,10 @@ li {
   list-style-type: none;
 }
 
+.MarkNotDone {
+  display: none;
+}
+
 .Clear {
   display: flex;
   justify-content: center;

@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const NoTasks = document.querySelector(".NoTasks");
   const ContextMenu = document.querySelector(".ContextMenu");
   const editButton = document.querySelector(".EditOption");
+  const MarkDone = document.querySelector(".MarkDone");
+  const MarkNotDone = document.querySelector(".MarkNotDone");
   const removeButton = document.querySelector(".RemoveOption");
   const ColorPicker = document.getElementById("ColorPicker");
   const OpenColorPickerButton = document.getElementById("OpenColorPicker");
@@ -156,6 +158,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   ColorPicker.addEventListener("input", SetTileColor);
+
+  //Mark a task done/Incomplete
+  function MarkTaskDone() {
+    if (ContextMenu.currentTask) {
+      ContextMenu.currentTask.innerHTML = `<span class="TaskText" style="text-decoration: line-through;">${ContextMenu.currentTask.innerHTML}</span>`;
+      ContextMenu.style.display = "none";
+      MarkDone.style.display = "none";
+      MarkNotDone.style.display = "block";
+    }
+  }
+
+  function MarkTaskIncomplete() {
+    if (ContextMenu.currentTask) {
+      ContextMenu.currentTask.innerHTML = `<span class="TaskText" style="text-decoration: none;>${ContextMenu.currentTask.innerHTML}</span>`;
+      ContextMenu.style.display = "none";
+      MarkNotDone.style.display = "none";
+      MarkDone.style.display = "block";
+    }
+  }
+
+  MarkDone.addEventListener("click", MarkTaskDone);
+  MarkNotDone.addEventListener("click", MarkTaskIncomplete);
 
   // Removing a task logic
   function RemoveTask() {
