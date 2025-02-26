@@ -93,7 +93,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  function EditTask() {}
+  function EditTask(li) {
+    const taskText = li.querySelector(".TaskText").textContent.trim();
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = taskText;
+    input.placeholder = "Edit the task";
+    input.className = "EditInput";
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.classList.add("btn");
+    saveButton.className = "SaveButton";
+
+    // Clear the task text and add the input field for editing
+    li.innerHTML = "";
+    li.appendChild(input);
+    li.appendChild(saveButton);
+
+    // Save updated task or revert if empty
+    function saveUpdatedTask() {
+      const updatedText = input.value.trim();
+      if (updatedText) {
+        li.innerHTML = `<span class="TaskText">${updatedText}</span>`;
+        // saveTasksToLocalStorage();
+      } else {
+        console.log("Task cannot be empty!");
+      }
+    }
+
+    saveButton.addEventListener("click", saveUpdatedTask);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        saveUpdatedTask();
+      }
+    });
+
+    input.focus();
+  }
 
   AddTask.addEventListener("click", () => {
     AddTaskFunction();
@@ -104,6 +142,34 @@ document.addEventListener("DOMContentLoaded", () => {
       AddTaskFunction();
     }
   });
+
+  // Color Picking Logic
+  function SetTileColor() {
+    const SelectedColor = ColorPicker.value;
+    if (ContextMenu.currentTask) {
+      ContextMenu.currentTask.style.backgroundColor = SelectedColor;
+    }
+  }
+  OpenColorPickerButton.addEventListener("click", () => {
+    ColorPicker.click();
+    ContextMenu.style.display = "none";
+  });
+
+  ColorPicker.addEventListener("input", SetTileColor);
+
+  // Removing a task logic
+  function RemoveTask() {
+    if (ContextMenu.currentTask) {
+      ContextMenu.currentTask.remove();
+      ContextMenu.style.display = "none";
+      if (ListContainer.children.length === 0) {
+        NoTasks.style.display = "block";
+        clearButton.style.display = "none";
+      }
+    }
+  }
+
+  removeButton.addEventListener("click", RemoveTask);
 
   // Hide context menu when clicking outside of it
   document.addEventListener("click", (e) => {
