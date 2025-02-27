@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       li.style.backgroundColor = color;
     }
     li.innerHTML = `
-      <span class="TaskText">${taskText}</span>
+      <span class="TaskText"> <i class="fa-regular fa-square"></i> ${taskText}</span>
     `;
 
     ListContainer.appendChild(li);
@@ -161,18 +161,28 @@ document.addEventListener("DOMContentLoaded", () => {
   ColorPicker.addEventListener("input", SetTileColor);
 
   //Mark a task done/Incomplete
-  function MarkTaskDone() {
-    if (ContextMenu.currentTask) {
-      ContextMenu.currentTask.querySelector(".TaskText").style.textDecoration =
-        "line-through";
+  function MarkTaskDone(taskElement) {
+    if (taskElement) {
+      const taskTextElement = taskElement.querySelector(".TaskText");
+      taskTextElement.style.textDecoration = "line-through";
+      const iconElement = taskTextElement.querySelector("i");
+      if (iconElement) {
+        iconElement.classList.remove("fa-square");
+        iconElement.classList.add("fa-check-square");
+      }
       ContextMenu.style.display = "none";
     }
   }
 
-  function MarkTaskIncomplete() {
-    if (ContextMenu.currentTask) {
-      ContextMenu.currentTask.querySelector(".TaskText").style.textDecoration =
-        "none";
+  function MarkTaskIncomplete(taskElement) {
+    if (taskElement) {
+      const taskTextElement = taskElement.querySelector(".TaskText");
+      taskTextElement.style.textDecoration = "none";
+      const iconElement = taskTextElement.querySelector("i");
+      if (iconElement) {
+        iconElement.classList.remove("fa-check-square");
+        iconElement.classList.add("fa-square");
+      }
       ContextMenu.style.display = "none";
     }
   }
@@ -192,8 +202,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  MarkDone.addEventListener("click", MarkTaskDone);
-  MarkNotDone.addEventListener("click", MarkTaskIncomplete);
+  ListContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("fa-square")) {
+      event.target.classList.remove("fa-square");
+      event.target.classList.add("fa-check-square"); // Toggle checked state
+      MarkTaskDone(event.target.closest("li"));
+    } else if (event.target.classList.contains("fa-check-square")) {
+      event.target.classList.remove("fa-check-square");
+      event.target.classList.add("fa-square"); // Toggle back to unchecked
+      MarkTaskIncomplete(event.target.closest("li"));
+    }
+  });
+
+  MarkDone.addEventListener("click", () => {
+    MarkTaskDone(ContextMenu.currentTask);
+  });
+
+  MarkNotDone.addEventListener("click", () => {
+    MarkTaskIncomplete(ContextMenu.currentTask);
+  });
 
   // Removing a task logic
   function RemoveTask() {
