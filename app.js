@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Store reference to the current task for edit/remove actions
       ContextMenu.currentTask = li;
+      UpdateContextMenuOptions();
     });
   }
 
@@ -162,19 +163,32 @@ document.addEventListener("DOMContentLoaded", () => {
   //Mark a task done/Incomplete
   function MarkTaskDone() {
     if (ContextMenu.currentTask) {
-      ContextMenu.currentTask.innerHTML = `<span class="TaskText" style="text-decoration: line-through;">${ContextMenu.currentTask.innerHTML}</span>`;
+      ContextMenu.currentTask.querySelector(".TaskText").style.textDecoration =
+        "line-through";
       ContextMenu.style.display = "none";
-      MarkDone.style.display = "none";
-      MarkNotDone.style.display = "block";
     }
   }
 
   function MarkTaskIncomplete() {
     if (ContextMenu.currentTask) {
-      ContextMenu.currentTask.innerHTML = `<span class="TaskText" style="text-decoration: none;>${ContextMenu.currentTask.innerHTML}</span>`;
+      ContextMenu.currentTask.querySelector(".TaskText").style.textDecoration =
+        "none";
       ContextMenu.style.display = "none";
-      MarkNotDone.style.display = "none";
-      MarkDone.style.display = "block";
+    }
+  }
+
+  function UpdateContextMenuOptions() {
+    if (ContextMenu.currentTask) {
+      const taskTextElement =
+        ContextMenu.currentTask.querySelector(".TaskText");
+
+      if (taskTextElement.style.textDecoration === "line-through") {
+        MarkDone.style.display = "none";
+        MarkNotDone.style.display = "block";
+      } else {
+        MarkDone.style.display = "block";
+        MarkNotDone.style.display = "none";
+      }
     }
   }
 
