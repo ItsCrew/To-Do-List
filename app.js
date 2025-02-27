@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ListContainer.appendChild(li);
 
+    // Context menu setup for the task
     li.addEventListener("contextmenu", (e) => {
       e.preventDefault();
 
