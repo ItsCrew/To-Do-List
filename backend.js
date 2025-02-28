@@ -6,19 +6,18 @@ const fetch = require("node-fetch");
 const app = express();
 app.use(cors());
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, "public")));
+// Serve static files from the "To-Do-List" directory
+app.use(express.static(path.join(__dirname, "")));
 
-// Serve views from the "views" directory
 app.get("/", (request, response) => {
-  return response.sendFile("index.html", {
-    root: path.join(__dirname, "views"),
+  return response.sendFile("/views/index.html", {
+    root: path.join(__dirname, ""),
   });
 });
 
 app.get("/auth/discord", (request, response) => {
-  return response.sendFile("dashboard.html", {
-    root: path.join(__dirname, "views"),
+  return response.sendFile("/views/dashboard.html", {
+    root: path.join(__dirname, ""),
   });
 });
 
@@ -43,8 +42,8 @@ app.get("/discord-api/users/@me", async (req, res) => {
 
 // Serve favicon
 app.get("/favicon.ico", (req, res) => {
-  res.sendFile("favicon.ico", {
-    root: path.join(__dirname, "public"),
+  res.sendFile("public/favicon.ico", {
+    root: path.join(__dirname, ""),
   });
 });
 
