@@ -14,11 +14,11 @@
       "use": "@vercel/static"
     },
     {
-      "src": "public/style.css",
+      "src": "/public/style.css",
       "use": "@vercel/static"
     },
     {
-      "src": "public/dashboard.css",
+      "src": "/public/dashboard.css",
       "use": "@vercel/static"
     },
     {
