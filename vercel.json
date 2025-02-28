@@ -22,12 +22,18 @@
       "use": "@vercel/static"
     },
     {
-      "src": "app.js",
+      "src": "public/favicon.ico",
       "use": "@vercel/static"
     },
     {
-      "src": "public/favicon.ico",
+      "src": "app.js",
       "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/backend.js"
     }
   ],
   "env": {
