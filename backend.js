@@ -48,7 +48,4 @@ app.get("/favicon.ico", (req, res) => {
   });
 });
 
-const port = "53134";
-app.listen(port, () =>
-  console.log(`App listening at http://localhost:${port}`)
-);
+module.exports = app;
