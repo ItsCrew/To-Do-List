@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/public/dashboard.css" />
+    <title>To Do List</title>
+  </head>
+  <!-- The Login Structure -->
+  <body>
+    <div class="LoggingIn">
+      <!-- <div class="Login">
+        <button id="LoginButton" class="LoginButton">
+          <a
+            class="boogywoogy"
+            href="https://discord.com/oauth2/authorize?client_id=1340939644623126559&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2Fauth%2Fdiscord&scope=identify"
+            >Login With Discord</a
+          >
+        </button>
+      </div> -->
+      <div class="Logout">
+        <img id="UserAvatar" alt="User Avatar" style="display:none;" />
+        <button id="LogOutButton" class="LogOutButton"><a class="LogoutLink" href="/">Logout</button></a>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="ToDoApp">
+          <h2 class="NoTasks" id="NoTasks">Nothing here. Add a task</h2>
+          <div class="InputField">
+            <div id="AddModal" class="AddModal">
+              <!-- Inside content -->
+              <div class="ModalContent">
+                <span class="close">&times;</span>
+                <h2 class="ModalHeading" id="ModalHeading">Add a Task</h2>
+                <div class="ModalOptions">
+                  <input
+                    type="text"
+                    id="InputBox"
+                    placeholder="Add a new task!"
+                  />
+                  <!-- <h3 class="AboveTimeBox">Add the Deadline!</h3>  -->
+                  <!-- <input type="time" id="TimeBox" placeholder="Add a time" /> -->
+                  <button id="AddTask" class="AddTask">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="AddPrompt">
+            <button class="AddPromptButton">Add</button>
+          </div>
+          <ol id="ListContainer">
+            <!-- The list will be here -->
+          </ol>
+          <div class="Clear">
+            <button class="ClearButton">Clear all</button>
+          </div>
+        </div>
+        <!-- Context Menu -->
+        <div class="ContextMenu">
+          <div class="EditOption"><i class="fa-solid fa-pen"></i> Edit</div>
+          <div class="ChooseColour" id="OpenColorPicker">
+            <i class="fa-solid fa-palette"></i> Choose Colour
+            <input type="color" id="ColorPicker" style="display: none" />
+          </div>
+          <div class="MarkDone">
+            <i class="fa-regular fa-square-check"></i> Mark Done
+          </div>
+          <div class="MarkNotDone">
+            <i class="fa-regular fa-rectangle-xmark"></i> Mark Incomplete
+          </div>
+          <div class="RemoveOption"><i class="fa-solid fa-trash"></i> Remove</div>
+        </div>
+      </div>
+      <script>
+        window.onload = () => {
+          const fragment = new URLSearchParams(window.location.hash.slice(1));
+          const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+
+          if (!accessToken) {
+              window.location.href = '/';
+          }
+
+          fetch(`/discord-api/users/@me?accessToken=${accessToken}&tokenType=${tokenType}`)
+          .then(result => result.json())
+          .then(response => {
+              console.log(response);
+              const { username, discriminator, avatar, id, global_name} = response;
+              //set the welcome username string
+              document.getElementById('NoTasks').innerText = `Welcome, ${global_name}! Add a task to get started.`;
+
+              // const userAvatar = document.getElementById("UserAvatar");
+              // userAvatar.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+              // userAvatar.style.display = 'block';
+              // document.getElementById("ModalHeading").src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+          })
+          .catch(console.error);
+        };
+      </script>
+      <script src="/app.js"></script>
+    </body>
+  </html>
+</html>

@@ -17,7 +17,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/public/style.css" />
     <title>To Do List</title>
   </head>
 
@@ -25,7 +25,13 @@
   <body>
     <div class="LoggingIn">
       <div class="Login">
-        <button id="LoginButton" class="LoginButton">Login With Discord</button>
+        <button id="LoginButton" class="LoginButton">
+          <a
+            class="LoginLink"
+            href="https://discord.com/oauth2/authorize?client_id=1340939644623126559&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2Fauth%2Fdiscord&scope=identify"
+            >Login With Discord</a
+          >
+        </button>
       </div>
       <div class="Logout">
         <button id="LogOutButton" class="LogOutButton">Logout</button>

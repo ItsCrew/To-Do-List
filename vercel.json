@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "views/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "views/dashboard.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/style.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/dashboard.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "app.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/favicon.ico",
+      "use": "@vercel/static"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "mongodb+srv://NotSmellyCat:NSC2000@notsmellycat.u11lpgy.mongodb.net/NCS"
+  }
+}

@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #153677, #4e085f);
+}
+
+/* Before Container (The whole place where we add tasks etc) */
+.LoggingIn {
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+}
+
+/*  .LoginButton {
+    width: 150px;
+    height: 40px;
+    background-color: #5865f2;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+  
+  .LoginButton:hover {
+    cursor: pointer;
+  }
+   */
+/* .boogywoogy {
+  text-decoration: none;
+  color: white;
+} */
+
+.LogOutButton {
+  width: 150px;
+  height: 40px;
+  background-color: #5865f2;
+  border: none;
+  border-radius: 10px;
+}
+
+.LogOutButton:hover {
+  cursor: pointer;
+  background-color: red;
+  transition: all 0.4s ease;
+}
+
+.LogoutLink {
+  text-decoration: white;
+  font-size: 17px;
+}
+
+/* .Logout {
+  display: none;
+} */
+
+/* After The login div. where everything is present */
+.container {
+  width: 100%;
+  min-height: 93.6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ToDoApp {
+  width: 50%;
+  min-width: 300px;
+  background-color: #fff;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+.NoTasks {
+  text-align: center;
+}
+
+.AddPrompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  border-radius: 40px;
+  padding: 15px 0 0 0;
+}
+
+.AddPromptButton {
+  height: 40px;
+  width: 70px;
+  border: none;
+  border-radius: 10px;
+}
+
+.AddModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.ModalContent {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 15px;
+  width: 80%;
+  height: 30%;
+  position: relative;
+}
+
+.ModalOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0 0 0;
+}
+
+#InputBox {
+  text-align: center;
+  height: 50px;
+  width: 50%;
+  border: none;
+  border: 2px black solid;
+  outline: none;
+  border-radius: 15px;
+}
+
+.AddTask {
+  height: 50px;
+  width: 5%;
+  border: none;
+  border-radius: 15px;
+}
+
+.close {
+  float: right;
+  color: #aaaaaa;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ModalHeading {
+  text-align: center;
+  font-size: 25px;
+}
+
+/* Base styling for the context menu */
+.ContextMenu {
+  position: absolute;
+  width: 150px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+  display: none; /* Hidden by default */
+  z-index: 1;
+}
+
+/* Style each menu option */
+.ContextMenu div {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+}
+
+/* Hover effect for options */
+.ContextMenu div:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+.ContextMenu .RemoveOption:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Add a smooth transition */
+.ContextMenu div {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Customize the first and last option to have rounded corners */
+.ContextMenu div:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.ContextMenu div:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  list-style-type: none;
+}
+
+.MarkNotDone {
+  display: none;
+}
+
+.Clear {
+  display: flex;
+  justify-content: center;
+}
+
+.ClearButton {
+  height: 40px;
+  width: 70px;
+  border: none;
+  border-radius: 10px;
+  display: none;
+}

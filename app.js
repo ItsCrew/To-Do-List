@@ -18,14 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const OpenColorPickerButton = document.getElementById("OpenColorPicker");
 
   // Login Function/Logic
-  function LoginUser() {
-    Login.style.display = "none";
-    Logout.style.display = "block";
-  }
+  // function LoginUser() {
+  //   Login.style.display = "none";
+  //   Logout.style.display = "block";
+  // }
 
-  Login.addEventListener("click", () => {
-    LoginUser();
-  });
+  // Login.addEventListener("click", () => {
+  //   LoginUser();
+  // });
 
   //Modal for adding a task logic
   AddPrompt.addEventListener("click", () => {
