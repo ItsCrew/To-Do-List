@@ -16,6 +16,9 @@
   ],
   "routes": [
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/backend.js"
     },
@@ -24,6 +27,8 @@
       "dest": "/views/index.html"
     }
   ],
+  "public": "public",
+
   "env": {
     "MONGODB_URI": "mongodb+srv://NotSmellyCat:NSC2000@notsmellycat.u11lpgy.mongodb.net/NCS"
   }
