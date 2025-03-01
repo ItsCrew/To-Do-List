@@ -90,8 +90,8 @@ app.get("/favicon.ico", (req, res) => {
 async function connectDB() {
   try {
     await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 50000, // Wait longer before failing
+      connectTimeoutMS: 50000,
     });
     console.log("Connected to MongoDB Atlas");
   } catch (error) {
