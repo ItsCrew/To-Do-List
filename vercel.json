@@ -4,15 +4,20 @@
     {
       "src": "backend.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "views/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "views/dashboard.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/backend.js"
-    },
-    {
-      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
