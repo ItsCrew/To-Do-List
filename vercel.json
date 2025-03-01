@@ -31,10 +31,14 @@
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/backend.js"
-    }
+  {
+    "src": "/api/(.*)",
+    "dest": "/backend.js"
+  },
+  {
+    "src": "/(.*)",
+    "dest": "/views/index.html"
+  }
   ],
   "env": {
     "MONGODB_URI": "mongodb+srv://NotSmellyCat:NSC2000@notsmellycat.u11lpgy.mongodb.net/NCS"
