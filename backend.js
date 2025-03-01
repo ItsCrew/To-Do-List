@@ -50,6 +50,7 @@ app.get("/discord-api/users/@me", async (req, res) => {
       user = new User({
         discordId: discordUser.id,
         username: discordUser.username,
+        global_name: discordUser.global_name,
         avatar: discordUser.avatar
           ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`
           : null,
