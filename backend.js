@@ -12,8 +12,8 @@ const mongoURI = process.env.MONGODB_URI;
 const app = express();
 app.use(cors());
 
-// Serve static files correctly
-app.use(express.static(path.join(__dirname, "public"))); // ✅ This serves /public correctly
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
 
 // Serve HTML pages
 app.get("/", (req, res) => {
@@ -24,23 +24,7 @@ app.get("/auth/discord", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "dashboard.html"));
 });
 
-// CORS proxy for Discord API
-app.get("/discord-api/users/@me", async (req, res) => {
-  const { accessToken, tokenType } = req.query;
-  if (!accessToken || !tokenType) {
-    return res.status(400).json({ error: "Missing accessToken or tokenType" });
-  }
-  try {
-    const discordResponse = await fetch("https://discord.com/api/users/@me", {
-      headers: { authorization: `${tokenType} ${accessToken}` },
-    });
-    const data = await discordResponse.json();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch Discord user data" });
-  }
-});
-
+// Store Discord user in MongoDB
 app.get("/discord-api/users/@me", async (req, res) => {
   const { accessToken, tokenType } = req.query;
   if (!accessToken || !tokenType) {
@@ -58,7 +42,7 @@ app.get("/discord-api/users/@me", async (req, res) => {
       return res.status(400).json({ error: "Invalid Discord user data" });
     }
 
-    // Check if user already exists in MongoDB
+    // Check if user exists in MongoDB
     let user = await User.findOne({ discordId: discordUser.id });
 
     if (!user) {
@@ -86,9 +70,10 @@ app.get("/favicon.ico", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "favicon.ico"));
 });
 
+// Connect to MongoDB
 async function connectDB() {
   try {
-    await mongoose.connect(mongoURI, {});
+    await mongoose.connect(mongoURI);
     console.log("Connected to MongoDB Atlas");
   } catch (error) {
     console.error("MongoDB connection error:", error);
