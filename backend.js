@@ -41,6 +41,46 @@ app.get("/discord-api/users/@me", async (req, res) => {
   }
 });
 
+app.get("/discord-api/users/@me", async (req, res) => {
+  const { accessToken, tokenType } = req.query;
+  if (!accessToken || !tokenType) {
+    return res.status(400).json({ error: "Missing accessToken or tokenType" });
+  }
+
+  try {
+    const discordResponse = await fetch("https://discord.com/api/users/@me", {
+      headers: { authorization: `${tokenType} ${accessToken}` },
+    });
+
+    const discordUser = await discordResponse.json();
+
+    if (!discordUser.id) {
+      return res.status(400).json({ error: "Invalid Discord user data" });
+    }
+
+    // Check if user already exists in MongoDB
+    let user = await User.findOne({ discordId: discordUser.id });
+
+    if (!user) {
+      // If user doesn't exist, create a new one
+      user = new User({
+        discordId: discordUser.id,
+        username: discordUser.username,
+        avatar: discordUser.avatar
+          ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`
+          : null,
+      });
+
+      await user.save(); // Save to MongoDB
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching Discord user:", error);
+    res.status(500).json({ error: "Failed to fetch Discord user data" });
+  }
+});
+
 // Serve favicon
 app.get("/favicon.ico", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "favicon.ico"));
