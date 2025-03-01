@@ -4,20 +4,9 @@
     {
       "src": "backend.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "views/index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "views/dashboard.html",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "handle": "filesystem"
-    },
     {
       "src": "/api/(.*)",
       "dest": "/backend.js"
@@ -27,6 +16,7 @@
       "dest": "/views/index.html"
     }
   ],
+  "public": "public",
   "env": {
     "MONGODB_URI": "mongodb+srv://NotSmellyCat:NSC2000@notsmellycat.u11lpgy.mongodb.net/NCS"
   }
